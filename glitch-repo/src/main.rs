@@ -1,11 +1,26 @@
 mod webpage_build_imports;
-// use imports::*;
+mod css_build_imports;
 
 mod webpage_build {
-    include!("webpage_build/game_list.rs");
+    include!("webpage_build/html/game_list.rs");
+}
+
+mod webpage_css_build {
+    include!("webpage_build/css/styles.rs");
+}
+
+fn css_build() {
+    const OUTPUT_PATH: &str = "webpage/styles";
+    webpage_css_build::game_list_render_css(OUTPUT_PATH);
+}
+
+fn html_build() {
+    const OUTPUT_PATH: &str = "webpage";
+    webpage_build::game_list_render(OUTPUT_PATH);
 }
 
 fn main() {
-    // Call the function from the included module
-    webpage_build::render_template();
+    // Build the CSS first just as a best practice.
+    css_build();
+    html_build();
 }
